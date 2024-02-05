@@ -38,7 +38,7 @@ module.exports.login = async(req ,res) => {
         
         if(checkUsername ) {
             if(checkPassword) {
-                return res.json({msg : "Lobin Sucessfully" , status : true}) ;
+                return res.json({msg : "Lobin Sucessfully" , status : true , user :checkUsername}) ;
             }
         }
     
@@ -48,5 +48,26 @@ module.exports.login = async(req ,res) => {
     } catch(err) {
         console.log(err) ;
     }
+}
+
+
+module.exports.setAvatar = async(req , res) => {
+
+    
+    try{
+           const userId = req.params.id ;
+           const userImg = req.body.image ;
+           const userdata = await User.findByIdAndUpdate(userId , {
+           isavatarSet : true ,
+            avatar : userImg ,
+        }) 
+        
+        
+        return res.json({isSet :userdata.isavatarSet , avatarImg : userdata.avatar}) ;
+
+
+      } catch(err) {
+         console.log(err) ;
+      }
 }
 
