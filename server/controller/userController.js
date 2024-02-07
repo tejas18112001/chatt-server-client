@@ -85,7 +85,7 @@ module.exports.allUsers = async(req , res) => {
 
       ])
      
-      console.log(users) ;
+    //   console.log(users) ;
       return res.json(users) ;
 
    }catch(err) {
