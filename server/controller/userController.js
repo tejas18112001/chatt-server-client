@@ -1,4 +1,5 @@
 
+const { json } = require('express');
 const User = require('../model/userModel') ;
 module.exports.register = async (req , res) => {
    try { 
@@ -38,7 +39,7 @@ module.exports.login = async(req ,res) => {
         
         if(checkUsername ) {
             if(checkPassword) {
-                return res.json({msg : "Lobin Sucessfully" , status : true , user :checkUsername}) ;
+                return res.json({msg : "Login Sucessfully" , status : true , user :checkUsername}) ;
             }
         }
     
@@ -71,3 +72,23 @@ module.exports.setAvatar = async(req , res) => {
       }
 }
 
+
+module.exports.allUsers = async(req , res) => {
+   try{
+      
+      const id = req.params.id ;
+      const users = await User.find({_id : {$ne : id}}).select([
+        "username" ,
+         "email" ,
+         "avatar" ,
+         "_id" ,
+
+      ])
+     
+      console.log(users) ;
+      return res.json(users) ;
+
+   }catch(err) {
+    console.log(err) ;
+   }
+}
