@@ -13,7 +13,7 @@ const userRoutes = require('./routes/userRoutes') ;
 app.use('/api/auth/',userRoutes) ;
 
 
-mongoose.connect(process.env.DATABASE_URL , {
+mongoose.connect(process.env.DATABASE_URL, {
     useNewUrlParser : true ,
     useUnifiedTopology : true ,
 
